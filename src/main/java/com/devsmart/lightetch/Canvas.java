@@ -3,6 +3,9 @@ package com.devsmart.lightetch;
 
 public interface Canvas {
 
+    public int getWidth();
+    public int getHeight();
+
     /**
      * Saves the current matrix and clip onto a private stack. Subsequent calls to translate,scale,rotate,skew,concat
      * or clipRect,clipPath will all operate as usual, but when the balancing call to restore() is made, those calls

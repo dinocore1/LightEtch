@@ -1,5 +1,7 @@
-package com.devsmart.lightetch;
+package com.devsmart.lightetch.widgets;
 
+
+import com.devsmart.lightetch.ViewGroup;
 
 public class LinearLayout extends ViewGroup {
 
@@ -11,7 +13,7 @@ public class LinearLayout extends ViewGroup {
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if(mOrientation == VERTICAL){
-
+            
         }
     }
 }

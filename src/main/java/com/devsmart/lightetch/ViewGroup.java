@@ -29,6 +29,11 @@ public class ViewGroup extends View {
     }
 
     @Override
+    public Iterable<View> children() {
+        return mChildren;
+    }
+
+    @Override
     public void draw(Canvas canvas) {
         for(View v : mChildren){
             v.draw(canvas);

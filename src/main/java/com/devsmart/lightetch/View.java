@@ -1,6 +1,8 @@
 package com.devsmart.lightetch;
 
 
+import java.util.Collections;
+
 public class View implements Drawable{
 
     public static class MeasureSpec {
@@ -60,6 +62,10 @@ public class View implements Drawable{
 
     private int mMeasuredWidth;
     private int mMeasuredHeight;
+    int mLeft;
+    int mTop;
+    int mRight;
+    int mBottom;
 
     public final void measure(int widthMeasureSpec, int heightMeasureSpec) {
         mPrivateFlags &= ~PFLAG_MEASURED_DIMENSION_SET;
@@ -88,8 +94,31 @@ public class View implements Drawable{
         mPrivateFlags |=  PFLAG_MEASURED_DIMENSION_SET;
     }
 
+    public final void layout(int left, int top, int right, int bottom) {
+        onLayout(left, top, right, bottom);
+    }
+
+    public void onLayout(int left, int top, int right, int bottom) {
+        mLeft = left;
+        mTop = top;
+        mRight = right;
+        mBottom = bottom;
+    }
+
+    public int getMeasuredWidth() {
+        return mRight - mLeft;
+    }
+
+    public int getMeasuredHeight() {
+        return mBottom - mTop;
+    }
+
     @Override
     public void draw(Canvas canvas) {
 
+    }
+
+    public Iterable<View> children() {
+        return Collections.emptyList();
     }
 }
