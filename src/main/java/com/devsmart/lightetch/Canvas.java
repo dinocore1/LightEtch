@@ -36,9 +36,8 @@ public interface Canvas {
     public void rotate(float degrees);
     public void scale(float sx, float sy);
     public void translate(float dx, float dy);
-    public void skew(float sx, float sy);
+    public void shear(float sx, float sy);
 
-    public void drawPoint(float x, float y, Paint paint);
-    public void drawLine(float startx, float starty, float stopx, float stopy, Paint paint);
+    public void drawLine(int startx, int starty, int stopx, int stopy);
 
 }

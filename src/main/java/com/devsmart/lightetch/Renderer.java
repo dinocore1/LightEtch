@@ -18,6 +18,7 @@ public class Renderer {
             for(View v : view.children()){
                 visit(v);
             }
+            view.draw(mCanvas);
             mCanvas.restore();
         }
     }

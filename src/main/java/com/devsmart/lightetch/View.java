@@ -60,12 +60,21 @@ public class View implements Drawable{
     private static final int PFLAG_MEASURED_DIMENSION_SET = 1;
     private int mPrivateFlags;
 
+    protected ViewGroup.LayoutParams mLayoutParams;
     private int mMeasuredWidth;
     private int mMeasuredHeight;
     int mLeft;
     int mTop;
     int mRight;
     int mBottom;
+
+    public void setLayoutParams(ViewGroup.LayoutParams params) {
+        mLayoutParams = params;
+    }
+
+    public ViewGroup.LayoutParams getLayoutParams() {
+        return mLayoutParams;
+    }
 
     public final void measure(int widthMeasureSpec, int heightMeasureSpec) {
         mPrivateFlags &= ~PFLAG_MEASURED_DIMENSION_SET;
@@ -106,11 +115,11 @@ public class View implements Drawable{
     }
 
     public int getMeasuredWidth() {
-        return mRight - mLeft;
+        return mMeasuredWidth;
     }
 
     public int getMeasuredHeight() {
-        return mBottom - mTop;
+        return mMeasuredHeight;
     }
 
     @Override

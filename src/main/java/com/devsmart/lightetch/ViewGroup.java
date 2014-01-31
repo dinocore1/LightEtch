@@ -5,6 +5,24 @@ import java.util.ArrayList;
 
 public class ViewGroup extends View {
 
+    public static class LayoutParams {
+
+        public static final int FILL_PARENT = -1;
+        public static final int WRAP_CONTENT = -2;
+
+        public int mWidth = WRAP_CONTENT;
+        public int mHeight = WRAP_CONTENT;
+
+
+    }
+
+    public static class MarginLayoutParams extends LayoutParams {
+        public int mMarginTop;
+        public int mMarginBottom;
+        public int mMarginLeft;
+        public int mMarginRight;
+    }
+
     private ArrayList<View> mChildren = new ArrayList<View>();
 
 
