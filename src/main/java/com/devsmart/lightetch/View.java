@@ -60,6 +60,11 @@ public class View implements Drawable{
     private static final int PFLAG_MEASURED_DIMENSION_SET = 1;
     private int mPrivateFlags;
 
+    /**
+     * Externally assignable stuff
+     */
+    public String id;
+
     protected ViewGroup.LayoutParams mLayoutParams;
     private int mMeasuredWidth;
     private int mMeasuredHeight;

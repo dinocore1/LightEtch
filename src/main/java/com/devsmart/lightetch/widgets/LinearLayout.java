@@ -6,8 +6,14 @@ import com.devsmart.lightetch.ViewGroup;
 
 public class LinearLayout extends ViewGroup {
 
-    public class LayoutParams extends MarginLayoutParams {
-        public int mWeight;
+    public static class LayoutParams extends MarginLayoutParams {
+
+        public static final int GRAVITY_LEFT = 0;
+        public static final int GRAVITY_RIGHT = 1;
+        public static final int GRAVITY_CENTER = 2;
+
+        public int weight;
+        public int gravity;
     }
 
     public static final int VERTICAL = 0;
@@ -28,8 +34,8 @@ public class LinearLayout extends ViewGroup {
 
         LinearLayout.LayoutParams thizlp = (LayoutParams) mLayoutParams;
 
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec) - thizlp.mMarginLeft - thizlp.mMarginRight;
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec) - thizlp.mMarginTop - thizlp.mMarginBottom;
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec) - thizlp.marginLeft - thizlp.marginRight;
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec) - thizlp.marginTop - thizlp.marginBottom;
 
         int width = 0;
         int height = 0;
@@ -41,7 +47,7 @@ public class LinearLayout extends ViewGroup {
         for(View child : children()){
 
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)child.getLayoutParams();
-            totalWeight += lp.mWeight;
+            totalWeight += lp.weight;
 
             child.measure(childMeasureSpecWidth, childMeasureSpecHeight);
             width = Math.max(width, child.getMeasuredWidth());
@@ -53,8 +59,8 @@ public class LinearLayout extends ViewGroup {
         if(delta != 0 && totalWeight > 0) {
             for(View child : children()) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)child.getLayoutParams();
-                if(lp.mWeight > 0) {
-                    int share = (int)(lp.mWeight * delta / totalWeight);
+                if(lp.weight > 0) {
+                    int share = (int)(lp.weight * delta / totalWeight);
                     totalWeight -= share;
                     delta -= share;
 

@@ -1,0 +1,10 @@
+<LinearLayout
+        id="rootId"
+        width="-1"
+        height="-2"
+        orientation="vertical">
+
+    <View
+        id="rad" />
+
+</LinearLayout>

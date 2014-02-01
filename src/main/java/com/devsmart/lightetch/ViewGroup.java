@@ -10,17 +10,17 @@ public class ViewGroup extends View {
         public static final int FILL_PARENT = -1;
         public static final int WRAP_CONTENT = -2;
 
-        public int mWidth = WRAP_CONTENT;
-        public int mHeight = WRAP_CONTENT;
+        public int width = WRAP_CONTENT;
+        public int height = WRAP_CONTENT;
 
 
     }
 
     public static class MarginLayoutParams extends LayoutParams {
-        public int mMarginTop;
-        public int mMarginBottom;
-        public int mMarginLeft;
-        public int mMarginRight;
+        public int marginTop;
+        public int marginBottom;
+        public int marginLeft;
+        public int marginRight;
     }
 
     private ArrayList<View> mChildren = new ArrayList<View>();
