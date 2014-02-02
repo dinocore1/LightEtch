@@ -32,10 +32,10 @@ public class LinearLayout extends ViewGroup {
 
     private void measureVertical(final int widthMeasureSpec, final int heightMeasureSpec) {
 
-        LinearLayout.LayoutParams thizlp = (LayoutParams) mLayoutParams;
+        ViewGroup.LayoutParams thizlp = mLayoutParams;
 
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec) - thizlp.marginLeft - thizlp.marginRight;
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec) - thizlp.marginTop - thizlp.marginBottom;
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
         int width = 0;
         int height = 0;

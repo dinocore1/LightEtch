@@ -1,6 +1,8 @@
 package com.devsmart.lightetch;
 
 
+import com.devsmart.lightetch.graphics.RectF;
+
 public interface Canvas {
 
     public int getWidth();
@@ -37,6 +39,8 @@ public interface Canvas {
     public void scale(float sx, float sy);
     public void translate(float dx, float dy);
     public void shear(float sx, float sy);
+
+    public void getStringBounds(String string, RectF bounds, Paint paint);
 
     public void drawLine(int startx, int starty, int stopx, int stopy, Paint paint);
 

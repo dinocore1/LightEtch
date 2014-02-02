@@ -1,11 +1,13 @@
 <LinearLayout
         id="rootId"
         width="fill"
-        height="warp"
+        height="wrap"
         orientation="vertical">
 
     <TextView
         id="rad"
-        text="Cool Mama" />
+        width="wrap"
+        height="wrap"
+        text="Radtacular" />
 
 </LinearLayout>

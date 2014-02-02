@@ -17,10 +17,10 @@
 package org.apache.pdfbox.pdmodel.edit;
 
 
-import java.awt.*;
-import java.awt.color.ColorSpace;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.PathIterator;
+import and.awt.Color;
+import and.awt.color.ColorSpace;
+import and.awt.geom.AffineTransform;
+import and.awt.geom.PathIterator;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;

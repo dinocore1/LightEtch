@@ -2,6 +2,8 @@ package com.devsmart.lightetch;
 
 
 import com.devsmart.lightetch.widgets.LinearLayout;
+import com.devsmart.lightetch.widgets.SurfaceView;
+import com.devsmart.lightetch.widgets.TextView;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -28,7 +30,19 @@ public class LayoutInflator {
             if(String.class.isAssignableFrom(fieldType)){
                 mField.set(mObject, value);
             } else if(fieldType.equals(int.class)){
-                mField.setInt(mObject, Integer.parseInt(value));
+                try {
+                    mField.setInt(mObject, Integer.parseInt(value));
+                } catch(NumberFormatException e) {
+                   if("width".equals(mField.getName()) || "height".equals(mField.getName())){
+                        if("fill".equals(value)){
+                            mField.setInt(mObject, ViewGroup.LayoutParams.FILL_PARENT);
+                        } else if("wrap".equals(value)){
+                            mField.setInt(mObject, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        } else {
+                            throw e;
+                        }
+                    }
+                }
             } else if(fieldType.equals(float.class)){
                 mField.setFloat(mObject, Float.parseFloat(value));
             }
@@ -41,7 +55,9 @@ public class LayoutInflator {
         static {
             mNameMap.put("View", View.class);
             mNameMap.put("ViewGroup", ViewGroup.class);
+            mNameMap.put("TextView", TextView.class);
             mNameMap.put("LinearLayout", LinearLayout.class);
+            mNameMap.put("SurfaceView", SurfaceView.class);
 
         }
 

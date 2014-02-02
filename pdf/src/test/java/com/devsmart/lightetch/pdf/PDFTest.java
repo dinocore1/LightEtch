@@ -1,9 +1,6 @@
 package com.devsmart.lightetch.pdf;
 
-import com.devsmart.lightetch.Canvas;
-import com.devsmart.lightetch.Paint;
-import com.devsmart.lightetch.Renderer;
-import com.devsmart.lightetch.View;
+import com.devsmart.lightetch.*;
 import com.devsmart.lightetch.graphics.Color;
 import com.devsmart.lightetch.render.PDFCanvas;
 
@@ -23,8 +20,8 @@ public class PDFTest {
 
         public LineView() {
             mPaint.mFillColor = Color.argb(0xff, 0xff, 0x0, 0x0);
-            mPaint.mStrokeColor = Color.argb(0xff, 0x0, 0xff, 0x0);
-            mPaint.mStrokeWidth = 10f;
+            mPaint.mStrokeColor = Color.argb(0xff, 0x0, 0xff, 0xff);
+            mPaint.mStrokeWidth = 5f;
         }
 
         @Override
@@ -52,5 +49,24 @@ public class PDFTest {
         pdf.save(out);
         out.close();
 
+    }
+
+    @Test
+    public void test2() throws Exception {
+        FileOutputStream out = new FileOutputStream(new File("test.pdf"));
+        PDDocument pdf = new PDDocument();
+        PDPage page = new PDPage();
+        pdf.addPage(page);
+
+
+        PDFCanvas canvas = new PDFCanvas(pdf, page);
+
+        View root = LayoutInflator.inflate(LayoutInflatorTest.class.getClassLoader().getSystemResourceAsStream("testlayout.xml"));
+        Renderer.render(root, canvas);
+
+        canvas.done();
+
+        pdf.save(out);
+        out.close();
     }
 }

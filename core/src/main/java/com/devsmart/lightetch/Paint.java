@@ -5,4 +5,6 @@ public class Paint {
     public int mStrokeColor;
     public int mFillColor;
     public float mStrokeWidth;
+
+    public float mTextSize;
 }

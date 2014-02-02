@@ -1,12 +1,16 @@
 package com.devsmart.lightetch.render;
 
 
+import and.awt.geom.AffineTransform;
 import com.devsmart.lightetch.Canvas;
 import com.devsmart.lightetch.Paint;
 import com.devsmart.lightetch.graphics.Color;
+import com.devsmart.lightetch.graphics.RectF;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.io.IOException;
 
@@ -19,6 +23,10 @@ public class PDFCanvas implements Canvas {
     public PDFCanvas(PDDocument doc, PDPage page) throws IOException {
         mPage = page;
         mStream = new PDPageContentStream(doc, page);
+        AffineTransform matrix = new AffineTransform();
+        matrix.translate(0, getHeight());
+        matrix.scale(1, -1);
+        mStream.concatenate2CTM(matrix);
     }
 
     public void done() {
@@ -84,6 +92,24 @@ public class PDFCanvas implements Canvas {
 
     @Override
     public void shear(float sx, float sy) {
+
+    }
+
+    @Override
+    public void getStringBounds(String string, RectF bounds, Paint paint) {
+
+        try {
+            PDFont font = PDType1Font.HELVETICA_BOLD;
+            float width = font.getStringWidth(string) / 1000 * paint.mTextSize;
+            float height = font.getFontBoundingBox().getHeight() / 1000 * paint.mTextSize;
+
+            bounds.setWidth(width);
+            bounds.setHeight(height);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
