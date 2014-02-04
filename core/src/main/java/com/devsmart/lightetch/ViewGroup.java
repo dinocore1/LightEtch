@@ -25,6 +25,9 @@ public class ViewGroup extends View {
 
     private ArrayList<View> mChildren = new ArrayList<View>();
 
+    public ViewGroup(Context context) {
+        super(context);
+    }
 
     public void addView(View view) {
         mChildren.add(view);
@@ -52,9 +55,5 @@ public class ViewGroup extends View {
     }
 
     @Override
-    public void draw(Canvas canvas) {
-        for(View v : mChildren){
-            v.draw(canvas);
-        }
-    }
+    public final void draw(Canvas canvas) {}
 }

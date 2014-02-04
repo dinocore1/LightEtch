@@ -1,6 +1,7 @@
 package com.devsmart.lightetch.widgets;
 
 
+import com.devsmart.lightetch.Context;
 import com.devsmart.lightetch.View;
 import com.devsmart.lightetch.ViewGroup;
 
@@ -20,6 +21,10 @@ public class LinearLayout extends ViewGroup {
     public static final int HORIZONTAL = 1;
 
     private int mOrientation = VERTICAL;
+
+    public LinearLayout(Context context) {
+        super(context);
+    }
 
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -66,10 +71,23 @@ public class LinearLayout extends ViewGroup {
 
                     child.measure(childMeasureSpecWidth, MeasureSpec.makeMeasureSpec(share, MeasureSpec.EXACTLY));
                 }
-
-
             }
+
+            height = heightSize - height;
         }
 
+        setMeasuredDimension(width, height);
+
+    }
+
+    @Override
+    public void onLayout(int left, int top, int right, int bottom) {
+
+        for(View child : children()){
+            int childLeft = ((LayoutParams)child.getLayoutParams()).marginLeft;
+            int childTop = ((LayoutParams)child.getLayoutParams()).marginTop;
+
+            child.layout(childLeft, childTop, childLeft+child.getMeasuredWidth(), childTop+child.getMeasuredHeight());
+        }
     }
 }

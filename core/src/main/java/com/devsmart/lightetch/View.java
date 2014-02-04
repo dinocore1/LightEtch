@@ -65,6 +65,8 @@ public class View implements Drawable{
      */
     public String id;
 
+    protected final Context mContext;
+
     protected ViewGroup.LayoutParams mLayoutParams;
     private int mMeasuredWidth;
     private int mMeasuredHeight;
@@ -72,6 +74,10 @@ public class View implements Drawable{
     protected int mTop;
     protected int mRight;
     protected int mBottom;
+
+    public View(Context context) {
+        mContext = context;
+    }
 
     public void setLayoutParams(ViewGroup.LayoutParams params) {
         mLayoutParams = params;

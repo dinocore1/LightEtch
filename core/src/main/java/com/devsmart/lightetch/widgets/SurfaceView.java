@@ -2,6 +2,7 @@ package com.devsmart.lightetch.widgets;
 
 
 import com.devsmart.lightetch.Canvas;
+import com.devsmart.lightetch.Context;
 import com.devsmart.lightetch.View;
 
 public class SurfaceView extends View {
@@ -12,8 +13,8 @@ public class SurfaceView extends View {
 
     private Callback mOnDrawCallback;
 
-    public SurfaceView() {
-
+    public SurfaceView(Context context) {
+        super(context);
     }
 
     public void setOnDraw(Callback cb) {

@@ -18,7 +18,8 @@ public class PDFTest {
 
         Paint mPaint = new Paint();
 
-        public LineView() {
+        public LineView(Context context) {
+            super(context);
             mPaint.mFillColor = Color.argb(0xff, 0xff, 0x0, 0x0);
             mPaint.mStrokeColor = Color.argb(0xff, 0x0, 0xff, 0xff);
             mPaint.mStrokeWidth = 5f;
@@ -42,7 +43,7 @@ public class PDFTest {
 
         PDFCanvas canvas = new PDFCanvas(pdf, page);
 
-        Renderer.render(new LineView(), canvas);
+        Renderer.render(new LineView(canvas), canvas);
 
         canvas.done();
 
@@ -61,12 +62,13 @@ public class PDFTest {
 
         PDFCanvas canvas = new PDFCanvas(pdf, page);
 
-        View root = LayoutInflator.inflate(LayoutInflatorTest.class.getClassLoader().getSystemResourceAsStream("testlayout.xml"));
+        View root = LayoutInflator.inflate(canvas, LayoutInflatorTest.class.getClassLoader().getSystemResourceAsStream("testlayout.xml"));
         Renderer.render(root, canvas);
 
         canvas.done();
 
         pdf.save(out);
+        pdf.close();
         out.close();
     }
 }

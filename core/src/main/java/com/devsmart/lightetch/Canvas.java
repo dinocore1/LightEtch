@@ -40,7 +40,7 @@ public interface Canvas {
     public void translate(float dx, float dy);
     public void shear(float sx, float sy);
 
-    public void getStringBounds(String string, RectF bounds, Paint paint);
+    public void drawText(String string, int x, int y, Paint paint);
 
     public void drawLine(int startx, int starty, int stopx, int stopy, Paint paint);
 
