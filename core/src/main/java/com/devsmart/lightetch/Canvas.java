@@ -43,5 +43,6 @@ public interface Canvas {
     public void drawText(String string, int x, int y, Paint paint);
 
     public void drawLine(int startx, int starty, int stopx, int stopy, Paint paint);
+    public void drawRect(float x, float y, float width, float height, Paint paint);
 
 }

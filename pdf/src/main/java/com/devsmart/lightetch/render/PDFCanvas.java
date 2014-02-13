@@ -175,4 +175,18 @@ public class PDFCanvas implements Canvas, Context {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void drawRect(float left, float top, float right, float bottom, Paint paint) {
+        try {
+            save();
+            mStream.setStrokingColor(Color.red(paint.mStrokeColor), Color.green(paint.mStrokeColor), Color.blue(paint.mStrokeColor));
+            mStream.setNonStrokingColor(Color.red(paint.mFillColor), Color.green(paint.mFillColor), Color.blue(paint.mFillColor));
+            mStream.setLineWidth(paint.mStrokeWidth);
+            mStream.fillRect(left, top, right-left, bottom-top);
+            restore();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

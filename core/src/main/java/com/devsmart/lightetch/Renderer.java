@@ -1,6 +1,8 @@
 package com.devsmart.lightetch;
 
 
+import com.devsmart.lightetch.graphics.RectF;
+
 public class Renderer {
 
     private static class DrawVisitor {
@@ -13,10 +15,15 @@ public class Renderer {
 
         void visit(View view) {
 
-            mCanvas.translate(view.mLeft, view.mTop);
+            final RectF bounds = view.getBounds();
+            mCanvas.translate(bounds.left(), bounds.top());
             mCanvas.save();
             for(View v : view.children()){
                 visit(v);
+            }
+            if(view.mBackground != null){
+                view.mBackground.setBounds(view.getBounds());
+                view.mBackground.draw(mCanvas);
             }
             view.draw(mCanvas);
             mCanvas.restore();

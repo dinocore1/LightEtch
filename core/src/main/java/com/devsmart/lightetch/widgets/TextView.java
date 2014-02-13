@@ -21,9 +21,12 @@ public class TextView extends View {
         RectF bounds = new RectF();
 
         int width = MeasureSpec.getSize(widthMeasureSpec);
+        int marginHeight = MeasureSpec.getSize(heightMeasureSpec);
         if(mLayoutParams instanceof ViewGroup.MarginLayoutParams){
             width -= ((ViewGroup.MarginLayoutParams)mLayoutParams).marginLeft;
             width -= ((ViewGroup.MarginLayoutParams)mLayoutParams).marginRight;
+            marginHeight += ((ViewGroup.MarginLayoutParams)mLayoutParams).marginTop;
+            marginHeight += ((ViewGroup.MarginLayoutParams)mLayoutParams).marginBottom;
         }
 
 
@@ -40,7 +43,7 @@ public class TextView extends View {
         }
 
         mContext.getStringBounds(text, bounds, paint);
-        measuredHeight = bounds.height() * lines.size();
+        measuredHeight = bounds.height() * lines.size() + marginHeight;
 
         setMeasuredDimension((int) Math.ceil(measureWidth), (int) Math.ceil(measuredHeight));
 

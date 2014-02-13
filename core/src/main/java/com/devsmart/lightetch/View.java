@@ -3,7 +3,7 @@ package com.devsmart.lightetch;
 
 import java.util.Collections;
 
-public class View implements Drawable{
+public class View extends Drawable{
 
     public static class MeasureSpec {
 
@@ -70,10 +70,7 @@ public class View implements Drawable{
     protected ViewGroup.LayoutParams mLayoutParams;
     private int mMeasuredWidth;
     private int mMeasuredHeight;
-    protected int mLeft;
-    protected int mTop;
-    protected int mRight;
-    protected int mBottom;
+    protected Drawable mBackground;
 
     public View(Context context) {
         mContext = context;
@@ -119,10 +116,7 @@ public class View implements Drawable{
     }
 
     public void onLayout(int left, int top, int right, int bottom) {
-        mLeft = left;
-        mTop = top;
-        mRight = right;
-        mBottom = bottom;
+        getBounds().set(left, top, right, bottom);
     }
 
     public int getMeasuredWidth() {

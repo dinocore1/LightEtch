@@ -1,6 +1,8 @@
 package com.devsmart.lightetch;
 
 
+import com.devsmart.lightetch.drawable.Rectangle;
+import com.devsmart.lightetch.graphics.Color;
 import com.devsmart.lightetch.widgets.LinearLayout;
 import com.devsmart.lightetch.widgets.SurfaceView;
 import com.devsmart.lightetch.widgets.TextView;
@@ -63,6 +65,29 @@ public class LayoutInflator {
                     ((ViewGroup.MarginLayoutParams)obj).marginTop = intVal;
                     ((ViewGroup.MarginLayoutParams)obj).marginLeft = intVal;
                     ((ViewGroup.MarginLayoutParams)obj).marginRight = intVal;
+                }
+                return retval;
+            }
+        });
+        sAssignRules.add(new AssignRule() {
+            @Override
+            public boolean assign(Object obj, String key, String value) {
+                boolean retval = obj instanceof View && ("background".equals(key));
+                if(retval){
+                    Rectangle rectbg = new Rectangle();
+                    rectbg.mColor = Color.parseColor(value);
+                    ((View)obj).mBackground = rectbg;
+                }
+                return retval;
+            }
+        });
+        sAssignRules.add(new AssignRule() {
+            @Override
+            public boolean assign(Object obj, String key, String value) {
+                boolean retval = obj instanceof LinearLayout && "orientation".equals(key);
+                if(retval){
+                    int o = "vertical".equals(value) ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL;
+                    ((LinearLayout)obj).orientation = o;
                 }
                 return retval;
             }
@@ -141,11 +166,14 @@ public class LayoutInflator {
             }
         }
 
+
         while(mParser.next() != XmlPullParser.END_DOCUMENT){
             switch(mParser.getEventType()){
                 case XmlPullParser.START_TAG:
                     ((ViewGroup)newView).addView(readTag());
                     break;
+                case XmlPullParser.END_TAG:
+                    return newView;
             }
         }
 

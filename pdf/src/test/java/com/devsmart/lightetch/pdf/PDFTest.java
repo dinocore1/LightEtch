@@ -28,7 +28,7 @@ public class PDFTest {
         @Override
         public void draw(Canvas canvas) {
             //canvas.rotate(45);
-            canvas.drawLine(0,60,mRight,60, mPaint);
+            canvas.drawLine(0,60,(int)getBounds().right(),60, mPaint);
         }
     }
 
