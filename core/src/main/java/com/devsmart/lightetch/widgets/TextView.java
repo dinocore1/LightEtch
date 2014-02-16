@@ -21,14 +21,6 @@ public class TextView extends View {
         RectF bounds = new RectF();
 
         int width = MeasureSpec.getSize(widthMeasureSpec);
-        int marginHeight = MeasureSpec.getSize(heightMeasureSpec);
-        if(mLayoutParams instanceof ViewGroup.MarginLayoutParams){
-            width -= ((ViewGroup.MarginLayoutParams)mLayoutParams).marginLeft;
-            width -= ((ViewGroup.MarginLayoutParams)mLayoutParams).marginRight;
-            marginHeight += ((ViewGroup.MarginLayoutParams)mLayoutParams).marginTop;
-            marginHeight += ((ViewGroup.MarginLayoutParams)mLayoutParams).marginBottom;
-        }
-
 
         float measureWidth = 0;
         float measuredHeight = 0;
@@ -37,13 +29,20 @@ public class TextView extends View {
 
         switch(MeasureSpec.getMode(widthMeasureSpec)){
             case MeasureSpec.AT_MOST:
-            case MeasureSpec.EXACTLY:
                 measureWidth = splitText(text, width, lines);
+                break;
+            case MeasureSpec.EXACTLY:
+                splitText(text, width, lines);
+                measureWidth = width;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                mContext.getStringBounds(text, bounds, paint);
+                measureWidth = bounds.width();
                 break;
         }
 
         mContext.getStringBounds(text, bounds, paint);
-        measuredHeight = bounds.height() * lines.size() + marginHeight;
+        measuredHeight = bounds.height() * lines.size();
 
         setMeasuredDimension((int) Math.ceil(measureWidth), (int) Math.ceil(measuredHeight));
 
@@ -82,10 +81,11 @@ public class TextView extends View {
         mContext.getStringBounds(text, bounds, paint);
         final float height = bounds.height();
 
-        float y = 0;
+        float y = height;
+        float x = 0;
 
         for(String line : lines) {
-            canvas.drawText(line, 0, (int) y, paint);
+            canvas.drawText(line, (int) x, (int) y, paint);
             y += height;
         }
     }

@@ -16,13 +16,12 @@ public class Renderer {
         void visit(View view) {
 
             final RectF bounds = view.getBounds();
-            mCanvas.translate(bounds.left(), bounds.top());
             mCanvas.save();
+            mCanvas.translate(bounds.left(), bounds.top());
             for(View v : view.children()){
                 visit(v);
             }
             if(view.mBackground != null){
-                view.mBackground.setBounds(view.getBounds());
                 view.mBackground.draw(mCanvas);
             }
             view.draw(mCanvas);

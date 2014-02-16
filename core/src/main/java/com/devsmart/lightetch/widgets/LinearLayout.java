@@ -39,25 +39,27 @@ public class LinearLayout extends ViewGroup {
 
         ViewGroup.LayoutParams thizlp = mLayoutParams;
 
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        final int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        final int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
         int width = 0;
         int height = 0;
         int totalWeight = 0;
 
-        int childMeasureSpecWidth = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.AT_MOST);
-        int childMeasureSpecHeight = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.AT_MOST);
-
         for(View child : children()){
 
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)child.getLayoutParams();
+
+            int childMeasureSpecWidth = MeasureSpec.makeMeasureSpec(widthSize - lp.marginLeft - lp.marginRight,
+                    MeasureSpec.AT_MOST);
+            int childMeasureSpecHeight = MeasureSpec.makeMeasureSpec(heightSize - lp.marginTop - lp.marginBottom,
+                    MeasureSpec.AT_MOST);
+
             totalWeight += lp.weight;
 
             child.measure(childMeasureSpecWidth, childMeasureSpecHeight);
-            width = Math.max(width, child.getMeasuredWidth());
+            width = Math.max(width, child.getMeasuredWidth() + lp.marginLeft + lp.marginRight);
             height += child.getMeasuredHeight();
-
         }
 
         int delta = height - heightSize;
@@ -70,8 +72,14 @@ public class LinearLayout extends ViewGroup {
                     totalWeight -= lp.weight;
                     delta -= share;
 
-                    child.measure(childMeasureSpecWidth, MeasureSpec.makeMeasureSpec(share, MeasureSpec.AT_MOST));
-                    width = Math.max(width, child.getMeasuredWidth());
+                    int childMeasureSpecWidth = MeasureSpec.makeMeasureSpec(widthSize - lp.marginLeft - lp.marginRight,
+                            MeasureSpec.AT_MOST);
+
+                    int childMeasureSpecHeight = MeasureSpec.makeMeasureSpec(share - lp.marginTop - lp.marginBottom,
+                            MeasureSpec.EXACTLY);
+
+                    child.measure(childMeasureSpecWidth, childMeasureSpecHeight);
+                    width = Math.max(width, child.getMeasuredWidth() + lp.marginLeft + lp.marginRight);
                 }
             }
 
@@ -86,25 +94,27 @@ public class LinearLayout extends ViewGroup {
 
         ViewGroup.LayoutParams thizlp = mLayoutParams;
 
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        final int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        final int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
         int width = 0;
         int height = 0;
         int totalWeight = 0;
 
-        int childMeasureSpecWidth = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.AT_MOST);
-        int childMeasureSpecHeight = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.AT_MOST);
-
         for(View child : children()){
 
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)child.getLayoutParams();
+
+            int childMeasureSpecWidth = MeasureSpec.makeMeasureSpec(widthSize - lp.marginLeft - lp.marginRight,
+                    MeasureSpec.AT_MOST);
+            int childMeasureSpecHeight = MeasureSpec.makeMeasureSpec(heightSize - lp.marginTop - lp.marginBottom,
+                    MeasureSpec.AT_MOST);
+
             totalWeight += lp.weight;
 
             child.measure(childMeasureSpecWidth, childMeasureSpecHeight);
             width += child.getMeasuredWidth();
-            height = Math.max(height, child.getMeasuredHeight());
-
+            height = Math.max(height, child.getMeasuredHeight() + lp.marginTop + lp.marginBottom);
         }
 
         int delta = width - widthSize;
@@ -117,8 +127,14 @@ public class LinearLayout extends ViewGroup {
                     totalWeight -= lp.weight;
                     delta -= share;
 
-                    child.measure(MeasureSpec.makeMeasureSpec(share, MeasureSpec.AT_MOST), childMeasureSpecHeight);
-                    height = Math.max(height, child.getMeasuredHeight());
+                    int childMeasureSpecWidth = MeasureSpec.makeMeasureSpec(share - lp.marginLeft - lp.marginRight,
+                            MeasureSpec.EXACTLY);
+
+                    int childMeasureSpecHeight = MeasureSpec.makeMeasureSpec(heightSize - lp.marginTop - lp.marginBottom,
+                            MeasureSpec.AT_MOST);
+
+                    child.measure(childMeasureSpecWidth, childMeasureSpecHeight);
+                    height = Math.max(height, child.getMeasuredHeight() + lp.marginTop + lp.marginBottom);
                 }
             }
 
@@ -134,25 +150,25 @@ public class LinearLayout extends ViewGroup {
 
         int childLeft = left;
         int childTop = top;
+
         for(View child : children()){
 
-            if(orientation == VERTICAL){
-                childLeft = ((LayoutParams)child.getLayoutParams()).marginLeft;
-                childTop += ((LayoutParams)child.getLayoutParams()).marginTop;
-            } else {
-                childLeft += ((LayoutParams)child.getLayoutParams()).marginLeft;
-                childTop = ((LayoutParams)child.getLayoutParams()).marginTop;
-            }
+            LinearLayout.LayoutParams lp = (LayoutParams) child.getLayoutParams();
 
             final int childWidth = child.getMeasuredWidth();
             final int childHeight = child.getMeasuredHeight();
 
-            child.layout(childLeft, childTop, childLeft+childWidth, childTop+childHeight);
+
+
+            child.layout(childLeft + lp.marginLeft,
+                    childTop + lp.marginTop,
+                    childLeft + lp.marginLeft + childWidth,
+                    childTop + lp.marginTop + childHeight);
 
             if(orientation == VERTICAL){
-                childTop += childHeight;
+                childTop += childHeight + lp.marginTop + lp.marginBottom;
             } else {
-                childLeft += childWidth;
+                childLeft += childWidth + lp.marginLeft + lp.marginRight;
             }
         }
     }

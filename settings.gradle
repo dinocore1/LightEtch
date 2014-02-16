@@ -1,2 +1,1 @@
-include ':pdf'
-include ':core'
+include 'core', 'pdf'

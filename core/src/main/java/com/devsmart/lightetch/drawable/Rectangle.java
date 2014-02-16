@@ -26,6 +26,6 @@ public class Rectangle extends Drawable {
     @Override
     public void draw(Canvas canvas) {
         RectF bounds = getBounds();
-        canvas.drawRect(0, 0, bounds.right(), bounds.bottom(), getPaint());
+        canvas.drawRect(0, 0, bounds.width(), bounds.height(), getPaint());
     }
 }

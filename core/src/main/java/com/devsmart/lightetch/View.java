@@ -112,11 +112,14 @@ public class View extends Drawable{
     }
 
     public final void layout(int left, int top, int right, int bottom) {
+        getBounds().set(left, top, right, bottom);
+        if(mBackground != null){
+            mBackground.setBounds(getBounds());
+        }
         onLayout(left, top, right, bottom);
     }
 
     public void onLayout(int left, int top, int right, int bottom) {
-        getBounds().set(left, top, right, bottom);
     }
 
     public int getMeasuredWidth() {

@@ -1,4 +1,9 @@
 <LinearLayout
+    width="fill"
+    height="fill"
+    orientation="vertical"
+    >
+<LinearLayout
         id="rootId"
         width="fill"
         height="wrap"
@@ -18,7 +23,20 @@
         width="wrap"
         height="wrap"
         weight="1"
-        margin="30"
+
+        background="#ffff00"
         text="This is some other text cool" />
+
+</LinearLayout>
+
+    <TextView
+            id=""
+            width="wrap"
+            height="wrap"
+            weight="1"
+            margin="15"
+            background="#00ff00"
+            text="This is some other text cool" />
+
 
 </LinearLayout>
