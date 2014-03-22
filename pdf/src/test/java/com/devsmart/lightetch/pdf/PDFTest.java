@@ -62,7 +62,7 @@ public class PDFTest {
 
         PDFCanvas canvas = new PDFCanvas(pdf, page);
 
-        View root = LayoutInflator.inflate(canvas, LayoutInflatorTest.class.getClassLoader().getSystemResourceAsStream("testlayout.xml"));
+        View root = LayoutInflator.inflate(canvas, this.getClass().getClassLoader().getSystemResourceAsStream("testlayout.xml"));
         Renderer.render(root, canvas);
 
         canvas.done();

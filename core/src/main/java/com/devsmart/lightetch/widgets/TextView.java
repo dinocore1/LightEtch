@@ -30,6 +30,9 @@ public class TextView extends View {
         switch(MeasureSpec.getMode(widthMeasureSpec)){
             case MeasureSpec.AT_MOST:
                 measureWidth = splitText(text, width, lines);
+                if(ViewGroup.LayoutParams.WRAP_CONTENT != mLayoutParams.width){
+                    measureWidth = Math.max(measureWidth, width);
+                }
                 break;
             case MeasureSpec.EXACTLY:
                 splitText(text, width, lines);

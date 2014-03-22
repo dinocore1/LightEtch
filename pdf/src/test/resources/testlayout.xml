@@ -31,7 +31,7 @@
 
     <TextView
             id=""
-            width="wrap"
+            width="fill"
             height="wrap"
             weight="1"
             margin="15"

@@ -52,10 +52,10 @@ public class RectF {
         mBottom = bottom;
 
         if(right < left) {
-            throw new RuntimeException("cannot have negitive width");
+            throw new RuntimeException("cannot have negative width");
         }
         if(bottom < top) {
-            throw new RuntimeException("cannot have negitive height");
+            throw new RuntimeException("cannot have negative height");
         }
     }
 
